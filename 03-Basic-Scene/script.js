@@ -41,13 +41,22 @@ renderer.setSize(sizes.width, sizes.height)
 const geometry = new THREE.BoxGeometry(1, 1, 1)
 
 // Creating the material
-const material = new THREE.MeshBasicMaterial({ color: 0x66ff22 })
+// const material = new THREE.MeshBasicMaterial({ color: 0x66ff22 })
+// Changin material type so that light gets reflected on the box
+const material = new THREE.MeshPhongMaterial({ color: 0x66ff22 })
 
 // Create the cube with the geometry and the material
 const cube = new THREE.Mesh(geometry, material)
 
 // Add the cube to the scene
 scene.add(cube)
+
+// Adding a light for better 3D perception
+{
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.72)
+  directionalLight.position.set(-1, 2, 4)
+  scene.add(directionalLight)
+}
 
 // Move the camera backwards prior rendering
 camera.position.z = 3
