@@ -1,0 +1,11 @@
+body {
+  background-color: #282c34;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.webgl {
+  overflow: hidden;
+}
