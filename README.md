@@ -15,3 +15,15 @@ I complemented the lessons and content from Bruno's course with the [official Th
 - #### [03 Basic Scene](./03-Basic-Scene/README.md)
 
 - #### [04 Webpack](./04-webpack/README.md)
+
+- #### [05 Transforming Objects](./05-transforming-objects/README.md)
+
+- #### [06 Animations](./06-animations/README.md)
+
+- #### [07 Cameras](./07-cameras/Lesson.md)
+
+- #### [08 Resizing and Fullscreen](./08-resizing-and-fullscreen/Lesson.md)
+
+- #### [09 Geometries](./09-geometries/Lesson.md)
+
+- #### [10 Debug UI](./10-debug-ui/Lesson.md)
