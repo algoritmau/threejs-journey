@@ -27,3 +27,5 @@ I complemented the lessons and content from Bruno's course with the [official Th
 - #### [09 Geometries](./09-geometries/Lesson.md)
 
 - #### [10 Debug UI](./10-debug-ui/Lesson.md)
+
+- #### [11 Textures](./11-textures/Lesson.md)
