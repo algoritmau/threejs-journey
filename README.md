@@ -31,3 +31,5 @@ I complemented the lessons and content from Bruno's course with the [official Th
 - #### [11 Textures](./11-textures/Lesson.md)
 
 - #### [12 Materials](./12-materials/Lesson.md)
+
+- #### [13 3D Text](./13-3d-text/Lesson.md)
