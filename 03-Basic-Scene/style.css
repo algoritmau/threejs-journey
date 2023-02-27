@@ -5,7 +5,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: hsl(0, 0%, 0%);
+  background-color: hsl(0 0 96%);
 }
 
 canvas {
