@@ -8,11 +8,11 @@ Run the following commands to get started:
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Run the local server at localhost:8080
-npm run dev
+pnpm dev
 
 # Build for production in the dist/ directory
-npm run build
+pnpm build
 ```
