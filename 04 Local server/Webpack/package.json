@@ -1,0 +1,59 @@
+{
+  "name": "04-webpack",
+  "version": "1.0.0",
+  "description": "Custom webpack setup for the lesson 4 of Bruno Simon's course: Threejs Journey",
+  "main": "index.js",
+  "scripts": {
+    "prod": "NODE_ENV=production webpack --mode production",
+    "dev": "webpack --mode development",
+    "watch": "webpack --mode development --watch",
+    "start": "webpack serve --mode development",
+    "lint": "eslint --cache --fix ./src/ts && prettier --write ./src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mprcodes/threejs-journey.git"
+  },
+  "keywords": [
+    "'Webpack'",
+    "'Threejs'",
+    "'TypeScript'"
+  ],
+  "author": "'Mauricio Paternina <hi@mpr.codes>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mprcodes/threejs-journey/issues"
+  },
+  "homepage": "https://github.com/mprcodes/threejs-journey#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "autoprefixer": "^10.4.13",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.3",
+    "eslint": "^8.35.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-standard-with-typescript": "^34.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.2",
+    "postcss-loader": "^7.0.2",
+    "prettier": "^2.8.4",
+    "pug-loader": "^2.4.0",
+    "sass": "^1.58.3",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1",
+    "terser-webpack-plugin": "^5.3.6",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.5",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1",
+    "webpack-watched-glob-entries-plugin": "^2.2.6"
+  }
+}
