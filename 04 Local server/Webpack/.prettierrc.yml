@@ -1,9 +1,0 @@
-trailingComma: 'es5'
-tabWidth: 2
-useTabs: false
-semi: false
-singleQuote: true
-endOfLine: 'lf'
-quoteProps: 'as-needed'
-printWidth: 96
-proseWrap: 'always'
