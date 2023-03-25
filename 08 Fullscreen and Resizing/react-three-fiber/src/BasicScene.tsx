@@ -5,22 +5,9 @@ import { Mesh } from 'three'
 
 import { animated, config, useSpring } from '@react-spring/three'
 
-import './App.sass'
+import { handleFullscreen } from '../utils/handleFullscreen'
 
-const cameraConfig = {
-  sizes: {
-    height: 600,
-    width: 800
-  },
-  frustum: {
-    // aspectRatio: this.sizes.height / this.sizes.width,
-    // TODO: Debug TypeScript error from above
-    aspectRatio: 600 / 800,
-    verticalFov: 64,
-    nearPlane: 0.1,
-    farPlane: 960
-  }
-}
+import './App.sass'
 
 function AnimatedCube() {
   const cubeRef = useRef<Mesh>(null!)
@@ -50,20 +37,23 @@ function AnimatedCube() {
 }
 
 function BasicScene() {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+
   return (
     <Canvas
-      style={{
-        width: cameraConfig.sizes.width,
-        height: cameraConfig.sizes.height
-      }}
       gl={{ alpha: false }}
       camera={{
-        aspect: cameraConfig.frustum.aspectRatio,
-        fov: cameraConfig.frustum.verticalFov,
-        near: cameraConfig.frustum.nearPlane,
-        far: cameraConfig.frustum.farPlane,
-        position: [2, 1, 3]
+        fov: 80,
+        aspect: 2,
+        near: 0.08,
+        far: 1024,
+        position: [2, 1, 2]
       }}
+      ref={canvasRef}
+      dpr={Math.min(window.devicePixelRatio, 2)}
+      onDoubleClick={() =>
+        handleFullscreen(canvasRef.current as HTMLCanvasElement)
+      }
     >
       <ambientLight intensity={0.1} />
       <directionalLight color="pink" position={[-1, 2, 4]} />
