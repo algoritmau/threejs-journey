@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-import { Mesh } from 'three'
+import { DirectionalLight, Mesh } from 'three'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 
@@ -15,9 +15,12 @@ import './App.sass'
 export default function Scene() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const meshRef = useRef<Mesh>(null)
+  const lightRef = useRef<DirectionalLight>(null)
 
   const debugObject = {
+    castShadow: true,
     color: 0xff0000,
+    scale: 1,
     visible: true,
     wireframe: false,
     position: {
@@ -73,6 +76,18 @@ export default function Scene() {
         meshRef.current?.material.color.set(debugObject.color)
       })
 
+    // Scale dropdown
+    gui
+      .add(debugObject, 'scale', { Small: 0.5, Medium: 1, Large: 2 })
+      .name('Scale')
+      .onChange(() => {
+        meshRef.current?.scale.set(
+          debugObject.scale,
+          debugObject.scale,
+          debugObject.scale
+        )
+      })
+
     // Spin button
     gui.add(debugObject, 'spin').name('Spin')
 
@@ -91,6 +106,14 @@ export default function Scene() {
       .onChange(() => {
         // @ts-ignore
         meshRef.current!.material.wireframe = debugObject.wireframe
+      })
+
+    // Toggle cast shadow
+    gui
+      .add(debugObject, 'castShadow')
+      .name('Cast Shadow')
+      .onChange(() => {
+        meshRef.current!.castShadow = debugObject.castShadow
       })
 
     // Open/Close controls with / key
@@ -125,17 +148,33 @@ export default function Scene() {
         far: 800,
         position: [2, 1, 2]
       }}
+      shadows={true}
       dpr={Math.min(window.devicePixelRatio, 2)}
       onDoubleClick={() =>
         handleFullscreen(canvasRef.current as HTMLCanvasElement)
       }
     >
       <ambientLight intensity={0.4} />
-      <directionalLight color={0xffffff} position={[-1, 2, 4]} />
+      <directionalLight
+        color={0xffffff}
+        position={[8, 8, 8]}
+        castShadow={true}
+        ref={lightRef}
+      />
 
-      <mesh ref={meshRef}>
+      <mesh ref={meshRef} castShadow={true}>
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial color={debugObject.color} />
+      </mesh>
+
+      {/* Plane */}
+      <mesh
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[0, -0.6, 0]}
+        receiveShadow={true}
+      >
+        <planeBufferGeometry args={[4, 4]} />
+        <meshStandardMaterial />
       </mesh>
 
       <OrbitControls enableDamping={true} />
