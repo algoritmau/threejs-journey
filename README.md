@@ -2,9 +2,13 @@
 
 This is an extended exploration of the Bruno Simon's course: [Three.js Journey](https://threejs-journey.xyz/).
 
-I complemented the lessons and content from Bruno's course with the [official Three.js documentation](https://threejs.org/docs/index.html#manual/introduction/Creating-a-scene) as well with content from other sources in order to achieve a solid understanding of Three.js.
+I've added some personal touches that helped me to get a better understading of Three.js
 
-I've also written all the content with TypeScript and Sass.
+- I've reviewed and used approaches and functionality from the [official Three.js documentation](https://threejs.org/docs/index.html#manual/introduction/Creating-a-scene)  and other online resources.
+
+- I used TypeScript and Sass.
+
+- I've also written each lesson in React Three Fiber.
 
 ## Lessons
 
@@ -39,4 +43,8 @@ I've also written all the content with TypeScript and Sass.
 - #### 10 Debug UI
   - [Vite](./10%20Debug%20UI/Vite)
   - [React Three Fiber](./10%20Debug%20UI/react-three-fiber)
+
+- #### 11 Textures
+  - [Vite](./11%20Textures/Vite)
+  - [React Three Fiber](./11%20Textures/react-three-fiber)
 
