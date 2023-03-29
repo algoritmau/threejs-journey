@@ -1,27 +1,44 @@
 import { useMemo, useRef } from 'react'
 
+import * as THREE from 'three'
 import { Canvas } from '@react-three/fiber'
-import { BufferAttribute } from 'three'
 
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, PointMaterial } from '@react-three/drei'
 
 import { getRandomPoint, handleFullscreen } from '../utils'
 
 import './App.sass'
 
-const BufferPoints = ({ count = 1000 }) => {
-  const positions = useMemo(() => {
-    const points = new Array(count).fill(0).map((_) => getRandomPoint())
+const Particles = ({ count = 1000 }) => {
+  const colorOrange = new THREE.Color(0xffa500)
+  const [positions, colors] = useMemo(() => {
+    const positions = [...new Array(count * 3)].map(() => getRandomPoint())
+    const colors = [...new Array(count)].flatMap(() => colorOrange.toArray())
 
-    return new BufferAttribute(new Float32Array(points), 3, false)
+    return [new Float32Array(positions), new Float32Array(colors)]
   }, [count])
 
   return (
     <points>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" {...positions} />
+        <bufferAttribute
+          attach="attributes-position"
+          args={[positions, 3]}
+          usage={THREE.DynamicDrawUsage}
+        />
+        <bufferAttribute
+          attach="attributes-color"
+          args={[colors, 3]}
+          usage={THREE.DynamicDrawUsage}
+        />
       </bufferGeometry>
-      <pointsMaterial size={0.1} color={0xe380fa} sizeAttenuation={true} />
+      <PointMaterial
+        transparent
+        vertexColors
+        size={8}
+        sizeAttenuation={false}
+        depthWrite={false}
+      />
     </points>
   )
 }
@@ -48,7 +65,7 @@ function Geometry() {
       <ambientLight intensity={0.1} />
       <directionalLight color="royalblue" position={[-1, 2, 4]} />
 
-      <BufferPoints />
+      <Particles />
 
       <OrbitControls enableDamping={true} />
     </Canvas>
@@ -57,5 +74,5 @@ function Geometry() {
 
 export default Geometry
 
-// FIXME: Computed radius is NaN
 // FIXME: Background color changes when fullscreen in Safari
+// FIXME: OrbitControls doesn't work in fullscreen mode
