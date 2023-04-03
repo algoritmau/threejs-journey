@@ -1,14 +1,9 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
-import GUI from 'lil-gui'
-
 import { shouldResize } from '../utils'
 
 import './style.sass'
-
-// Debug
-const gui = new GUI()
 
 // Renderer
 const canvas = document.getElementById('webgl') as HTMLCanvasElement
