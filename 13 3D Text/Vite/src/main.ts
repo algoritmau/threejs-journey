@@ -29,66 +29,67 @@ const scene = new THREE.Scene()
 const fontLoader = new FontLoader()
 const FONT_URL = 'fonts/nb_architekt_neue_normal.json'
 
-fontLoader.load(
-  FONT_URL,
-  (font) => {
-    const fontSettings = {
-      font,
-      size: 0.8,
-      height: 0.2,
-      curveSegments: 2,
-      bevelEnabled: true,
-      bevelThickness: 0.04,
-      bevelSize: 0.02,
-      bevelOffset: 0,
-      bevelSegments: 2
+fontLoader.load(FONT_URL, (font) => {
+  const fontSettings = {
+    font,
+    size: 0.8,
+    height: 0.2,
+    curveSegments: 2,
+    bevelEnabled: true,
+    bevelThickness: 0.04,
+    bevelSize: 0.02,
+    bevelOffset: 0,
+    bevelSegments: 2
   }
 
-    const matcapMaterial = new THREE.MeshMatcapMaterial({ matcap: matcaps.crystal })
-    
-    const textGeometry = new TextGeometry('Threejs\nJourney', fontSettings)
-    const textMesh = new THREE.Mesh(textGeometry, matcapMaterial)
+  // A material shared for text and donut objects
+  const sharedMaterial = new THREE.MeshMatcapMaterial({
+    matcap: matcaps.crystal
+  })
 
-    // Add multiple donut-shaped objects to the scene
-    const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
+  const textGeometry = new TextGeometry('Threejs\nJourney', fontSettings)
+  const textMesh = new THREE.Mesh(textGeometry, sharedMaterial)
 
-    for (let i = 0; i < 256; i++) {
-      const donutMesh = new THREE.Mesh(donutGeometry, matcapMaterial)
+  // Compute bounding box
+  textGeometry.computeBoundingBox()
 
-      // Randomize positions
-      donutMesh.position.set(
-        (Math.random() - 0.5) * 12,
-        (Math.random() - 0.5) * 12,
-        (Math.random() - 0.5) * 12
-      )
-      
-      // Randomize rotation
-      donutMesh.rotateX(Math.random() * Math.PI)
-      donutMesh.rotateY(Math.random() * Math.PI)
+  // textGeometry.translate(
+  //   -(textGeometry.boundingBox.max.x - 0.02) * 0.5,
+  //   -(textGeometry.boundingBox.max.y - 0.02) * 0.5,
+  //   -(textGeometry.boundingBox.max.z - 0.03) * 0.5
+  // )
 
-      // Randomize scale
-      const randomScale = Math.random()
-      donutMesh.scale.set(randomScale, randomScale, randomScale)
+  textGeometry.center()
 
-      scene.add(donutMesh)
+  scene.add(textMesh)
 
-    // TODO: Set up GUI to change matcap
-    }
+  // Add multiple donut-shaped objects to the scene
+  const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
+  const donutCount = 256
+  const donutMeshes = Array(donutCount)
+    .fill(null)
+    .map(() => new THREE.Mesh(donutGeometry, sharedMaterial))
 
-    // Compute bounding box
-    textGeometry.computeBoundingBox()
-    
-    // textGeometry.translate(
-    //   -(textGeometry.boundingBox.max.x - 0.02) * 0.5,
-    //   -(textGeometry.boundingBox.max.y - 0.02) * 0.5,
-    //   -(textGeometry.boundingBox.max.z - 0.03) * 0.5
-    // )
+  // Modify each donut object
+  donutMeshes.forEach((donutMesh) => {
+    // Randomize positions
+    donutMesh.position.set(
+      (Math.random() - 0.5) * 12,
+      (Math.random() - 0.5) * 12,
+      (Math.random() - 0.5) * 12
+    )
 
-    textGeometry.center()
-    
-    scene.add(textMesh)
-  }
-)
+    // Randomize rotation
+    donutMesh.rotateX(Math.random() * Math.PI)
+    donutMesh.rotateY(Math.random() * Math.PI)
+
+    // Randomize scale
+    const randomScale = Math.random()
+    donutMesh.scale.set(randomScale, randomScale, randomScale)
+  })
+
+  scene.add(...donutMeshes)
+})
 
 // Adding lights for better perception of 3D space
 {
