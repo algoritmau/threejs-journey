@@ -57,5 +57,10 @@ I've added some personal touches that helped me to get a better understading of 
   - [React Three Fiber](./11%20Textures/react-three-fiber)
 
 - #### 12 Materials
+
   - [Vite](./12%20Materials/Vite)
   - [React Three Fiber](./11%20Materials/react-three-fiber)
+
+- #### 13 3D Text
+  - [Vite](./13%203D%20Text/Vite)
+  - [React Three Fiber](./13%203D%20Text/react-three-fiber)
