@@ -1,18 +1,5 @@
-# 07. Cameras
+# 3D Text
 
-I've set up a custom Vite config to use TypeScript and Sass.
+In this lesson, I've added a set of matcaps I downloaded from [nidorx's repo](https://github.com/nidorx/matcaps).
 
-## Setup
-
-Run this following commands to install the dependencies, start the development server, and build for production:
-
-```bash
-# Install dependencies (only the first time)
-pnpm install
-
-# Run the local server at localhost:5173
-pnpm dev
-
-# Build for production in the dist/ directory
-pnpm build
-```
+![3d-text-lesson-demo](https://github.com/mprcodes/threejs-journey/screenshots/13-3d-text-demo.jpg)
