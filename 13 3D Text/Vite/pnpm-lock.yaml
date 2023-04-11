@@ -9,6 +9,9 @@ devDependencies:
   '@types/three':
     specifier: ^0.149.0
     version: 0.149.0
+  lil-gui:
+    specifier: ^0.18.1
+    version: 0.18.1
   sass:
     specifier: ^1.58.3
     version: 1.58.3
@@ -359,6 +362,10 @@ packages:
   /is-number@7.0.0:
     resolution: {integrity: sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==}
     engines: {node: '>=0.12.0'}
+    dev: true
+
+  /lil-gui@0.18.1:
+    resolution: {integrity: sha512-nsDJLflFGro81hcGqaiDNBEKgkMKNF9okmMmW3Xc6sPXP1zyfD3oIftyctvBQD2iTIUgWDw6CuME1IQZD+OvLw==}
     dev: true
 
   /nanoid@3.3.4:

@@ -5,6 +5,8 @@ import { TextGeometry } from 'three/addons/geometries/TextGeometry.js'
 
 import matcaps from './matcaps'
 
+import GUI from 'lil-gui'
+
 import { shouldResize } from '../utils'
 
 import './style.sass'
@@ -89,6 +91,20 @@ fontLoader.load(FONT_URL, (font) => {
   })
 
   scene.add(...donutMeshes)
+
+  // GUI Controls
+  const gui = new GUI()
+  const guiSettings = {
+    matcap: matcaps.crystal
+  }
+
+  gui.add(guiSettings, 'matcap', matcaps).onChange((value: THREE.Texture) => {
+    textMesh.material.matcap = value
+
+    // donutMeshes.forEach((donutMesh: THREE.Mesh) => {
+    //   donutMesh.material.matcap = value
+    // })
+  })
 })
 
 // Adding lights for better perception of 3D space
