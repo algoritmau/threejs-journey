@@ -1,47 +1,98 @@
-import { Suspense, useRef } from 'react'
+import { Suspense, useLayoutEffect, useMemo, useRef } from 'react'
 
 import * as THREE from 'three'
-import { TextureLoader } from 'three'
-import { Canvas, useLoader } from '@react-three/fiber'
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
+import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
+import { Canvas, extend, useLoader } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
+
+import type { Vector3 } from '@react-three/fiber'
 
 import { handleFullscreen } from '../utils'
 
 import './App.sass'
 
+extend({ TextGeometry })
+
+const Donut = ({
+  material,
+  geometry
+}: {
+  material: JSX.Element
+  geometry: JSX.Element
+}) => {
+  const position: Vector3 = useMemo(
+    () => [
+      (Math.random() - 0.5) * 10,
+      (Math.random() - 0.5) * 10,
+      (Math.random() - 0.5) * 10
+    ],
+    []
+  )
+
+  const rotation: Vector3 = useMemo(
+    () => [Math.random() * Math.PI, Math.random() * Math.PI, 0],
+    []
+  )
+
+  const scale: Vector3 = useMemo(() => {
+    const randomScale = Math.random() * 0.4
+
+    return [randomScale, randomScale, randomScale]
+  }, [])
+
+  return (
+    <mesh position={position} rotation={rotation} scale={scale}>
+      {material}
+      {geometry}
+    </mesh>
+  )
+}
+
 export default function Scene() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const materialRef = useRef<THREE.Material | null>(null)
 
-  const [
-    alphaTexture,
-    aoTexture,
-    colorTexture,
-    heightTexture,
-    metalnessTexture,
-    normalTexture,
-    roughnessTexture,
-    minecraftTexture,
-    checkerboardTextureLarge,
-    checkerboardTextureSmall
-  ] = useLoader(TextureLoader, [
-    '/assets/textures/door/alpha.jpg',
-    '/assets/textures/door/ambientOcclusion.jpg',
-    '/assets/textures/door/color.jpg',
-    '/assets/textures/door/height.jpg',
-    '/assets/textures/door/metalness.jpg',
-    '/assets/textures/door/normal.jpg',
-    '/assets/textures/door/roughness.jpg',
-    '/assets/textures/minecraft.png',
-    '/assets/textures/checkerboard-1024x1024.png',
-    '/assets/textures/checkerboard-8x8.png'
-  ])
+  const donutGeometry = <torusGeometry args={[0.3, 0.2, 20, 45]} />
+  const baseMaterial = <meshNormalMaterial />
 
-  minecraftTexture.magFilter = THREE.NearestFilter
-  checkerboardTextureSmall.magFilter = THREE.NearestFilter
-  checkerboardTextureLarge.minFilter = THREE.NearestFilter
+  const Text: React.FC = () => {
+    const font = useLoader(
+      FontLoader,
+      '/assets/fonts/nb_architekt_neue_normal.json'
+    )
+    const fontConfig = useMemo(
+      () => ({
+        font,
+        size: 0.64,
+        height: 0.8,
+        curveSegments: 4,
+        bevelEnabled: true,
+        bevelThickness: 0.04,
+        bevelSize: 0.04,
+        bevelOffset: 0,
+        bevelSegments: 2
+      }),
+      [font]
+    )
 
-  // Disable mipmap generation since it uses nearest filter for minFilter
-  checkerboardTextureLarge.generateMipmaps = false
+    const text = 'Mauricio\nPaternina'
+    const textRef = useRef<THREE.Mesh | null>(null)
+
+    useLayoutEffect(() => {
+      if (textRef.current) {
+        textRef.current.geometry.center()
+      }
+    }, [text])
+
+    return (
+      <mesh ref={textRef} position={[0, 0, 0]}>
+        {baseMaterial}
+        <textGeometry args={[text, fontConfig]} />
+      </mesh>
+    )
+  }
 
   return (
     <Canvas
@@ -62,33 +113,11 @@ export default function Scene() {
         <ambientLight intensity={0.4} />
         <directionalLight color={0xffffff} position={[8, 8, 8]} />
 
-        <mesh position={[0, 2, 0]} name="door-cube">
-          <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial
-            alphaMap={alphaTexture}
-            aoMap={aoTexture}
-            map={colorTexture}
-            displacementMap={heightTexture}
-            metalnessMap={metalnessTexture}
-            normalMap={normalTexture}
-            roughnessMap={roughnessTexture}
-          />
-        </mesh>
+        <Text />
 
-        <mesh position={[2, 2, 0]} name="minecraft-cube">
-          <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial map={minecraftTexture} />
-        </mesh>
-
-        <mesh position={[0, 0, 0]} name="large-checkerboard-cube">
-          <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial map={checkerboardTextureLarge} />
-        </mesh>
-
-        <mesh position={[2, 0, 0]} name="small-checkerboard-cube">
-          <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial map={checkerboardTextureSmall} />
-        </mesh>
+        {Array.from({ length: 256 }, (_, i) => (
+          <Donut key={i} material={baseMaterial} geometry={donutGeometry} />
+        ))}
 
         <OrbitControls enableDamping={true} />
       </Suspense>
