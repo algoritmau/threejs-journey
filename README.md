@@ -64,3 +64,8 @@ I've added some personal touches that helped me to get a better understading of 
 - #### 13 3D Text
   - [Vite](./13%203D%20Text/Vite)
   - [React Three Fiber](./13%203D%20Text/react-three-fiber)
+
+#### 15. Lights
+
+- [Vanilla Three.js](./15%20Lights/vanilla)
+- [react-three-fiber](./15%20Lights/react-three-fiber)
