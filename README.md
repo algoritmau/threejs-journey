@@ -62,10 +62,16 @@ I've added some personal touches that helped me to get a better understading of 
   - [React Three Fiber](./11%20Materials/react-three-fiber)
 
 - #### 13 3D Text
+
   - [Vite](./13%203D%20Text/Vite)
   - [React Three Fiber](./13%203D%20Text/react-three-fiber)
 
-#### 15. Lights
+- #### 15. Lights
 
 - [Vanilla Three.js](./15%20Lights/vanilla)
+- [react-three-fiber](./15%20Lights/react-three-fiber)
+
+- #### 16. Shadows
+
+- [Vanilla Three.js](./16%20Shadows/vanilla)
 - [react-three-fiber](./15%20Lights/react-three-fiber)
