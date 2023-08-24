@@ -29,9 +29,7 @@ yarn-error.log*
 
 .vercel
 
-#build files
+# build files
 /build
 .vscode/*
 
-# 3D Models
-**/public/assets/models
