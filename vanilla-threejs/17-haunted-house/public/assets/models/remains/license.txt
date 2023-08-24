@@ -1,0 +1,11 @@
+Model Information:
+* title:	Remains
+* source:	https://sketchfab.com/3d-models/remains-7663ab71893f44b2b6466db3c625b061
+* author:	seenoise (https://sketchfab.com/seenoise)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Remains" (https://sketchfab.com/3d-models/remains-7663ab71893f44b2b6466db3c625b061) by seenoise (https://sketchfab.com/seenoise) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
