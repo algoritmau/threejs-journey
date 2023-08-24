@@ -32,3 +32,6 @@ yarn-error.log*
 #build files
 /build
 .vscode/*
+
+# 3D Models
+**/public/assets/models
